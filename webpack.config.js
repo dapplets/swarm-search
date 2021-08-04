@@ -31,7 +31,7 @@ exports.default = {
       use: [{
         loader: 'url-loader',
         options: {
-          limit: 50 * 1024 // Convert images < 50kb to base64 strings
+          limit: 512 * 1024 // Convert images < 512kb to base64 strings
         }
       }]
     }
@@ -53,7 +53,7 @@ exports.default = {
   resolve: {
     extensions: [".ts", ".js"],
     fallback: {
-      "stream": false, // require.resolve("stream-browserify"),
+      "stream": require.resolve("stream-browserify"),
       "timers": false, // require.resolve("timers-browserify"),
       "buffer": false, // require.resolve("buffer-browserify"),
       "assert": false, // require.resolve("assert-browserify"),

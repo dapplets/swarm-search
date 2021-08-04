@@ -64,6 +64,7 @@ export default class TwitterAdapter {
             },
             contextBuilder: (p: any) => {
                 return ({
+                    id: document.querySelector('#search #search')?.['value'],
                     search: document.querySelector('#search #search')?.['value']
                 })
             },

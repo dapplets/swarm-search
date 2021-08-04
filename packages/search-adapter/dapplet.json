@@ -1,0 +1,8 @@
+{
+  "name": { "$ref": "package.json#/name" },
+  "branch": "default",
+  "version": { "$ref": "package.json#/version" },
+  "type": "INTERFACE",
+  "title": "Search Adapter",
+  "description": { "$ref": "package.json#/description" }
+}

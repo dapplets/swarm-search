@@ -7,12 +7,12 @@
   "description": { "$ref": "package.json#/description" },
   "main": { "$ref": "package.json#/main" },
   "icon": "src/icons/icon64.png",
-  "contextIds": ["my-virtual-adapter.dapplet-base.eth"],
+  "contextIds": ["search-adapter"],
   "config": {
     "schema": "config/schema.json",
     "default": "config/default.json"
   },
   "dependencies": {
-    "my-virtual-adapter.dapplet-base.eth": "0.1.0"
+    "search-adapter": "0.1.0"
   }
 }

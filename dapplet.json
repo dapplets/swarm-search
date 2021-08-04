@@ -1,5 +1,6 @@
 [
     "/packages/google-adapter/dapplet.json",
     "/packages/youtube-adapter/dapplet.json",
+    "/packages/search-adapter/dapplet.json",
     "/packages/search-dapplet/dapplet.json"
 ]

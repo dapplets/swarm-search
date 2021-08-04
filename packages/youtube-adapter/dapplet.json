@@ -9,5 +9,8 @@
     "contextIds": ["youtube.com", "www.youtube.com"],
     "dependencies": {
         "dynamic-adapter.dapplet-base.eth": "0.6.10"
+    },
+    "interfaces": {
+      "search-adapter": "0.1.0"
     }
 }

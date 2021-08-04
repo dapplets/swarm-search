@@ -1,0 +1,5 @@
+{
+  "name": "search-adapter",
+  "version": "0.1.0",
+  "description": "Interface for search adapters"
+}

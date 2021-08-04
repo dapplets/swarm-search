@@ -19,6 +19,7 @@
             "google-adapter": ["packages/google-adapter/src"],
             "youtube-adapter": ["packages/youtube-adapter/src"],
             "search-dapplet": ["packages/search-dapplet/src"]
-        }
+        },
+        "composite": true
     }
 }

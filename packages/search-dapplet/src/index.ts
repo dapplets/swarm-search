@@ -1,6 +1,6 @@
-import {} from '@dapplets/dapplet-extension';
-import EXAMPLE_IMG from './icons/icon19.png';
-import GRAY_IMG from './icons/icon19gray.png';
+import { } from '@dapplets/dapplet-extension';
+import { Api } from './api';
+import THUMBNAIL_IMG from './icons/thumbnail.png';
 
 const searchResults = [
   {
@@ -32,87 +32,27 @@ const searchResults = [
 
 @Injectable
 export default class GoogleFeature {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-  @Inject('my-virtual-adapter.dapplet-base.eth') public adapter: any;
+
+  @Inject('search-adapter')
+  public adapter: any;
+
+  private _api = new Api();
 
   activate() {
     const { button, result } = this.adapter.exports;
     this.adapter.attachConfig({
-      MENU: () => [
-        button({
-          initial: 'RESULTS',
-          RESULTS: {
-            label: 'Hi',
-            img: GRAY_IMG,
-            tooltip: 'Hi, friend!',
-            isActive: false,
+      SEARCH_RESULT_GROUP: async () => {
+        const search = await this._api.search();
+        return search.map(x => result({
+          "DEFAULT": {
+            ...x,
+            img: THUMBNAIL_IMG,
             exec: (ctx, me) => {
-              const el = document.querySelector(ctx.insertPoint);
-              el.style.display = 'none';
-              if (!('replacedEl' in ctx)) {
-                ctx.replacedEl = document.createElement('div');
-                ctx.replacedEl.style.justifyContent = 'center';
-                const elImg = document.createElement('img');
-                elImg.src = `${EXAMPLE_IMG}`;
-                ctx.replacedEl.appendChild(elImg);
-                el.parentElement.appendChild(ctx.replacedEl);
-              }
-              ctx.replacedEl.style.display = 'flex';
-              me.state = 'FRIENDS';
-            },
-          },
-          FRIENDS: {
-            label: 'Hi',
-            img: EXAMPLE_IMG,
-            tooltip: 'Go to results',
-            isActive: true,
-            exec: (ctx, me) => {
-              const el = document.querySelector(ctx.insertPoint);
-              el.style.display = 'block';
-              ctx.replacedEl.style.display = 'none';
-              me.state = 'RESULTS';
-            },
-          },
-        }),
-      ],
-      SEARCH_RESULT: () => [
-        button({
-          initial: 'DEFAULT',
-          DEFAULT: {
-            label: 'Get data',
-            tooltip: 'Show in the alert',
-            img: EXAMPLE_IMG,
-            exec: (ctx) => {
-              const { title, link, description } = ctx;
-              alert(`  title: ${title}\n  link: ${link}\n  description: ${description}`);
-            },
-          },
-        }),
-      ],
-      WIDGETS: () => [
-        result({
-          initial: 'DEFAULT',
-          DEFAULT: {
-            img: EXAMPLE_IMG,
-            title: 'clouds',
-            searchResults,
-          },
-        }),
-      ],
-      DAPPLET_SEARCH_RESULT: () => [
-        button({
-          initial: 'DEFAULT',
-          DEFAULT: {
-            label: 'Get data',
-            tooltip: 'Show in the alert',
-            img: EXAMPLE_IMG,
-            exec: (ctx) => {
-              const { title, link, description } = ctx;
-              alert(`  title: ${title}\n  link: ${link}\n  description: ${description}`);
-            },
-          },
-        }),
-      ],
+              window.open('https://gateway.ethswarm.org/files/6995fd78ab680c53d6cc4003082e5cf9b5225644ae6e0f1892ecf966075f0248', '_blank')
+            }
+          }
+        }));
+      },
     });
   }
 }
