@@ -55,19 +55,16 @@ export default class TwitterAdapter {
         },
         SEARCH_RESULT_GROUP: {
             containerSelector: 'ytd-search',
-            contextSelector: "#container",
             insPoints: {
                 SEARCH_RESULTS: {
-                    selector: "ytd-video-renderer",
-                    insert: 'begin'
+                    selector: "ytd-item-section-renderer #header",
+                    insert: 'inside'
                 }
             },
-            contextBuilder: (p: any) => {
-                return ({
-                    id: document.querySelector('#search #search')?.['value'],
-                    search: document.querySelector('#search #search')?.['value']
-                })
-            },
+            contextBuilder: (p: any) => ({
+                id: document.location.href,
+                query: document.querySelector('#search #search')?.['value']
+            }),
             theme: this._getTheme
         }
     };
@@ -94,7 +91,7 @@ export default class TwitterAdapter {
     }
 
     private _getTheme() {
-        const isDark = document.querySelector('html').getAttribute('dark') === 'true';
+        const isDark = document.documentElement.getAttribute('dark') === 'true';
         return (isDark) ? "DARK" : "LIGHT";
     }
 }
