@@ -1,0 +1,7 @@
+{
+  "name": "google-adapter",
+  "version": "0.1.0",
+  "description": "",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts"
+}

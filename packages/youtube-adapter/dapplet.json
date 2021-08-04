@@ -1,0 +1,13 @@
+{
+    "name": { "$ref": "package.json#/name" },
+    "branch": "default",
+    "version": { "$ref": "package.json#/version" },
+    "type": "ADAPTER",
+    "title": "YouTube Adapter",
+    "description": { "$ref": "package.json#/description" },
+    "main": { "$ref": "package.json#/main" },
+    "contextIds": ["youtube.com", "www.youtube.com"],
+    "dependencies": {
+        "dynamic-adapter.dapplet-base.eth": "0.6.10"
+    }
+}

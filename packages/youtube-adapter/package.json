@@ -1,0 +1,10 @@
+{
+  "name": "youtube-adapter",
+  "version": "0.7.0",
+  "description": "YouTube adapter",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
+  "devDependencies": {
+    "ytdl-core": "^4.8.3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "main": {
+    "exampleString": "some string value",
+    "exampleHiddenString": "some string value"
+  },
+  "test": {
+    "exampleString": "some string value",
+    "exampleHiddenString": "some string value"
+  },
+  "dev": {
+    "exampleString": "some string value",
+    "exampleHiddenString": "some string value"
+  }
+}
