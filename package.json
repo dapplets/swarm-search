@@ -1,0 +1,46 @@
+{
+  "packageManager": "yarn@3.0.0",
+  "private": true,
+  "name": "swarm-search",
+  "version": "0.1.0",
+  "main": "index.js",
+  "description": "Swarm Search",
+  "author": "Dapplets Team",
+  "license": "MIT",
+  "keywords": [
+    "swarm",
+    "ethereum",
+    "dapplets"
+  ],
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack",
+    "link": "npm link @dapplets/dapplet-extension"
+  },
+  "repository": "git+https://github.com/dapplets/swarm-search.git",
+  "bugs": {
+    "url": "https://github.com/dapplets/swarm-search/issues"
+  },
+  "homepage": "https://github.com/dapplets/swarm-search#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@dapplets/dapplet-extension": "latest",
+    "assert-browserify": "^2.0.0",
+    "buffer-browserify": "^0.2.5",
+    "https-browserify": "^1.0.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "timers-browserify": "^2.0.12",
+    "ts-loader": "^9.2.5",
+    "typescript": "^4.3.5",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.48.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "declaration-bundler-webpack-plugin": "^1.0.3"
+  }
+}
