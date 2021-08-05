@@ -6,6 +6,7 @@ export interface IResultState {
     title: string;
     views: string;
     date: string;
+    channelIcon?: string;
     channel: string;
     description: string;
     disabled: boolean;
@@ -29,7 +30,7 @@ export class Result {
     public mount() {
         if (!this.el) this._createElement();
 
-        const { img, title, hidden, views, date, channel, description, badges, theme } = this.state;
+        const { img, title, hidden, views, date, channelIcon, channel, description, badges, theme } = this.state;
 
         if (hidden) {
             this.el.innerHTML = '';
@@ -37,11 +38,14 @@ export class Result {
         } else {
             this.el.innerHTML = `
                 <div style="display: flex; cursor: pointer; margin-top: 16px;">
-                    <img style="display: block; margin-right: 16px; width: 360px; height: 202px;" width="360px" height="202px" src="${img}" />
+                    <img style="display: block; margin-right: 16px; min-width: 360px; width: 360px; height: 202px; object-fit: contain; background: #000;" src="${img}" />
                     <div style="flex: auto;">
-                        <div style="font-size: 18px; font-weight: 400; line-height: 24px; ${(theme === "DARK") ? "color: #fff;" : ''}">${title}</div>
-                        <div style="font-size: 13px; font-weight: 400; line-height: 18px; ${(theme === "DARK") ? "color: #aaa;" : 'color: rgb(96, 96, 96);'}">${views} views · ${date}</div>
-                        <div style="font-size: 13px; font-weight: 400; line-height: 18px; ${(theme === "DARK") ? "color: #aaa;" : 'color: rgb(96, 96, 96);'} margin: 10px 0;">${channel}</div>
+                        <div style="font-size: 18px; font-weight: 400; line-height: 24px; ${(theme === "DARK") ? "color: #fff;" : 'color: #000;'}">${title}</div>
+                        <div style="font-size: 13px; font-weight: 400; line-height: 18px; ${(theme === "DARK") ? "color: #aaa;" : 'color: rgb(96, 96, 96);'}">${(views) ? `${views} views · ` : ''}${date}</div>
+                        <div style="font-size: 13px; font-weight: 400; ${(theme === "DARK") ? "color: #aaa;" : 'color: rgb(96, 96, 96);'} margin: 10px 0; display: flex;">
+                            ${(channelIcon) ? `<img style="border-radius: 12px; width: 24px; height: 24px; object-fit: cover; margin-right: 8px;" src="${channelIcon}" alt="${channel}" width="24" height="24" />` : ''}
+                            <div style="line-height: 24px;">${channel}</div>
+                        </div>
                         <div style="font-size: 13px; font-weight: 400; line-height: 18px; ${(theme === "DARK") ? "color: #aaa;" : 'color: rgb(96, 96, 96);'}">${description}</div>
                         <div style="margin-top: 10px;">
                             ${(badges) ? (badges.map(x => (`<div 
@@ -55,7 +59,6 @@ export class Result {
                                     line-height: 12px;
                                     ${(x.basic) ? (`color: ${x.color ?? 'color: rgb(96,96,96)'};`) : 'color: rgb(96,96,96);'}
                                     margin-right: 4px;
-                                    text-transform: uppercase;
                                     float: left;
                                 "
                                 ${(x.tooltip) ? `title="${x.tooltip}"` : ''}

@@ -1,6 +1,8 @@
 import { } from '@dapplets/dapplet-extension';
 import { Api } from './api';
-import THUMBNAIL_IMG from './icons/thumbnail.png';
+import DEVIANART_LOGO from './icons/deviantart.svg';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 
 @Injectable
 export default class GoogleFeature {
@@ -11,18 +13,26 @@ export default class GoogleFeature {
   private _api = new Api();
 
   activate() {
+    TimeAgo.addDefaultLocale(en);
+    const timeAgo = new TimeAgo('en-US');
     const { button, result } = this.adapter.exports;
     this.adapter.attachConfig({
       SEARCH_RESULT_GROUP: async (ctx) => {
-        const results = await this._api.search();
-        return results.map(x => result({
+        const results = await this._api.search(ctx.query, 0);
+        return results.splice(0, 3).map(x => result({
           "DEFAULT": {
-            ...x,
-            title: ctx.query,
-            img: THUMBNAIL_IMG,
-            exec: (ctx, me) => {
-              window.open('https://gateway.ethswarm.org/files/6995fd78ab680c53d6cc4003082e5cf9b5225644ae6e0f1892ecf966075f0248', '_blank')
-            }
+            title: x.title,
+            // views: "10M",
+            date: timeAgo.format(x.pubDate),
+            channelIcon: x.author?.icon,
+            channel: x.author?.name,
+            description: x.description.substr(0, 130) + ' ...',
+            img: x.thumbnail.reverse()[0].url,
+            badges: [{
+              label: 'Swarm Search',
+              color: '#ffc300'
+            }],
+            exec: (ctx, me) => window.open(x.link, '_blank')
           }
         }));
       },
