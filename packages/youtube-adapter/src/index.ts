@@ -63,7 +63,8 @@ export default class TwitterAdapter {
             },
             contextBuilder: (p: any) => ({
                 id: document.location.href,
-                query: document.querySelector('#search #search')?.['value']
+                query: document.querySelector('#search #search')?.['value'],
+                types: ['video']
             }),
             theme: this._getTheme
         }

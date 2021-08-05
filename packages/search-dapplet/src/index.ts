@@ -18,6 +18,7 @@ export default class GoogleFeature {
     const { button, result } = this.adapter.exports;
     this.adapter.attachConfig({
       SEARCH_RESULT_GROUP: async (ctx) => {
+        console.log(`searching of ${ctx.types?.join(', ')} ...`);
         const results = await this._api.search(ctx.query, 0);
         return results.splice(0, 3).map(x => result({
           "DEFAULT": {
