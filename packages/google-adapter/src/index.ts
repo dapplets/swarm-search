@@ -1,9 +1,10 @@
 import { IFeature } from '@dapplets/dapplet-extension';
 import { Button } from './button';
+import { ResultContainer } from './resultContainer';
 import { Result } from './result';
 
 type ContextBuilder = {
-  [propName: string]: string;
+  [propName: string]: any;
 };
 type Exports = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -14,6 +15,7 @@ type Exports = {
 export default class GoogleAdapter {
   public exports = (): Exports => ({
     button: this.adapter.createWidgetFactory(Button),
+    resultContainer: this.adapter.createWidgetFactory(ResultContainer),
     result: this.adapter.createWidgetFactory(Result),
   });
 
@@ -79,6 +81,21 @@ export default class GoogleAdapter {
         id: '',
       }),
     },
+    SEARCH_RESULT_GROUP: {
+      containerSelector: 'body',
+      insPoints: {
+        SEARCH_RESULTS: {
+          selector: '#rso > *',
+          insert: 'begin',
+        },
+      },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      contextBuilder: (x: any): ContextBuilder => ({
+        id: new URL(document.location.href).searchParams.get('q'),
+        query: new URL(document.location.href).searchParams.get('q'),
+        types: ['all']
+      }),
+    }
   };
 
   constructor(

@@ -24,6 +24,7 @@ export default class GoogleFeature {
           "DEFAULT": {
             title: x.title,
             // views: "10M",
+            url: x.link,
             date: timeAgo.format(x.pubDate),
             channelIcon: x.author?.icon,
             channel: x.author?.name,
