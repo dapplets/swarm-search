@@ -40,7 +40,14 @@ export class Result {
                     <div style="margin: 5px 0 5px 0;">
                         <a style="cursor: pointer;"><h3>${title}</h3></a>
                     </div>
-                    <div style="font-size: 14px; color: #4d5156; line-height: 22.12px;"><span>${date}</span> — ${description}</div>
+                    <div style="display: flex;">
+                        <div><img style="cursor: pointer; display: block; min-width: 116px; width: 116px; height: 65px; border-radius: 8px; margin-right: 9px; object-fit: contain; background: #000;" src="${img}" alt="${title}"/></div>
+                        <div style="font-size: 14px; color: #4d5156; line-height: 22.12px;">
+                            ${(!img) ? 
+                                `<span>${date}</span> — ${description}` : 
+                                `<div>${description}</div><div>${date} · Uploaded by ${channel}</div>`}
+                        </div>
+                    </div>
                 </div>        
             `;
         }
