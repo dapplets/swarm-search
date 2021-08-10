@@ -1,6 +1,7 @@
 import { } from '@dapplets/dapplet-extension';
 import { Api } from './api';
-import DEVIANART_LOGO from './icons/deviantart.svg';
+import SWARM_PLUS_ICON from './icons/swarm-plus-icon.svg';
+import PLUS_SMALL_ICON from './icons/plus_small.svg';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 
@@ -11,33 +12,67 @@ export default class GoogleFeature {
   public adapter: any;
 
   private _api = new Api();
+  private _config: any;
+  private _searchQuery: string;
+  private _searchResults: any[] = [];
+  private _showingResultsNmbr = 3;
+  private _setConfig: any;
+  private _searchOffset = 0;
 
   activate() {
     TimeAgo.addDefaultLocale(en);
     const timeAgo = new TimeAgo('en-US');
-    const { button, result } = this.adapter.exports;
-    this.adapter.attachConfig({
-      SEARCH_RESULT_GROUP: async (ctx) => {
-        console.log(`searching of ${ctx.types?.join(', ')} ...`);
-        const results = await this._api.search(ctx.query, 0);
-        return results.splice(0, 3).map(x => result({
-          "DEFAULT": {
-            title: x.title,
-            // views: "10M",
-            url: x.link,
-            date: timeAgo.format(x.pubDate),
-            channelIcon: x.author?.icon,
-            channel: x.author?.name,
-            description: x.description.substr(0, 130) + ' ...',
-            img: x.thumbnail.reverse()[0].url,
-            badges: [{
-              label: 'Swarm Search',
-              color: '#ffc300'
-            }],
-            exec: (ctx, me) => window.open(x.link, '_blank')
+    const { result, moreResults } = this.adapter.exports;
+    this._setConfig = () => {
+      this._config = {
+        SEARCH_RESULT_GROUP: async (ctx) => {
+          if (ctx.query !== this._searchQuery || this._showingResultsNmbr >= this._searchResults.length - 5) {
+            this._searchQuery = ctx.query;
+            console.log(`searching of ${ctx.types?.join(', ')} ...`);
+            const newSearchResults = await this._api.search(this._searchQuery, this._searchOffset++);
+            this._searchResults = this._searchResults.concat(newSearchResults);
           }
-        }));
-      },
-    });
+          const showingResults = this._searchResults
+            .filter((value, index) => index < this._showingResultsNmbr)
+            .map(x => result({
+              DEFAULT: {
+                title: x.title,
+                // views: "10M",
+                url: x.link,
+                date: timeAgo.format(x.pubDate),
+                channelIcon: x.author?.icon,
+                channel: x.author?.name,
+                description: x.description.substr(0, 130) + ' ...',
+                img: x.thumbnail.reverse()[0]?.url,
+                badges: [{
+                  label: 'Swarm Search',
+                  color: '#ffc300'
+                }],
+                exec: () => window.open(x.link, '_blank')
+              }
+            }));
+          showingResults.push(
+            moreResults({
+              DEFAULT: {
+                title: 'More from Swarm',
+                color: '#FF9519',
+                icon: {
+                  youtube: PLUS_SMALL_ICON,
+                  google: SWARM_PLUS_ICON,
+                },
+                exec: () => {
+                  this._showingResultsNmbr += 5
+                  this.adapter.detachConfig(this._config);
+                  this.adapter.attachConfig(this._setConfig());
+                },
+              }
+            })
+          );
+          return showingResults;
+        },
+      };
+      return this._config;
+    };
+    this.adapter.attachConfig(this._setConfig());
   }
 }

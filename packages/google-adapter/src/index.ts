@@ -2,6 +2,7 @@ import { IFeature } from '@dapplets/dapplet-extension';
 import { Button } from './button';
 import { ResultContainer } from './resultContainer';
 import { Result } from './result';
+import { MoreResults } from './moreResults';
 
 type ContextBuilder = {
   [propName: string]: any;
@@ -17,6 +18,7 @@ export default class GoogleAdapter {
     button: this.adapter.createWidgetFactory(Button),
     resultContainer: this.adapter.createWidgetFactory(ResultContainer),
     result: this.adapter.createWidgetFactory(Result),
+    moreResults: this.adapter.createWidgetFactory(MoreResults),
   });
 
   public config = {
@@ -85,6 +87,10 @@ export default class GoogleAdapter {
       containerSelector: 'body',
       insPoints: {
         SEARCH_RESULTS: {
+          selector: '#rso > *',
+          insert: 'begin',
+        },
+        PLUS: {
           selector: '#rso > *',
           insert: 'begin',
         },

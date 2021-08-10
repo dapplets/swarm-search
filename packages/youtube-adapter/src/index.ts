@@ -3,16 +3,18 @@ import { IFeature } from '@dapplets/dapplet-extension';
 import { IButtonState, Button } from './button';
 import { Badge } from './badge';
 import { Result } from './result';
+import { MoreResults } from './moreResults';
 import ytdl from 'ytdl-core';
 
 @Injectable
-export default class TwitterAdapter {
+export default class YoutubeAdapter {
 
     // ToDo: refactor it
     public exports = featureId => ({
         button: this.adapter.createWidgetFactory(Button),
         badge: this.adapter.createWidgetFactory(Badge),
-        result: this.adapter.createWidgetFactory(Result)
+        result: this.adapter.createWidgetFactory(Result),
+        moreResults: this.adapter.createWidgetFactory(MoreResults),
     });
 
     public config = {
@@ -59,7 +61,11 @@ export default class TwitterAdapter {
                 SEARCH_RESULTS: {
                     selector: "ytd-item-section-renderer #header",
                     insert: 'inside'
-                }
+                },
+                PLUS: {
+                    selector: "ytd-item-section-renderer #header",
+                    insert: 'end'
+                },
             },
             contextBuilder: (p: any) => ({
                 id: document.location.href,
