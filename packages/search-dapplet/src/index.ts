@@ -26,8 +26,14 @@ export default class GoogleFeature {
     this._setConfig = () => {
       this._config = {
         SEARCH_RESULT_GROUP: async (ctx) => {
-          if (ctx.query !== this._searchQuery || this._showingResultsNmbr >= this._searchResults.length - 5) {
+          if (ctx.query !== this._searchQuery) {
             this._searchQuery = ctx.query;
+            this._searchOffset = 0;
+            this._showingResultsNmbr = 3;
+            console.log(`searching of ${ctx.types?.join(', ')} ...`);
+            this._searchResults = await this._api.search(this._searchQuery, this._searchOffset++);
+          }
+          if (this._showingResultsNmbr >= this._searchResults.length - 5) {
             console.log(`searching of ${ctx.types?.join(', ')} ...`);
             const newSearchResults = await this._api.search(this._searchQuery, this._searchOffset++);
             this._searchResults = this._searchResults.concat(newSearchResults);
