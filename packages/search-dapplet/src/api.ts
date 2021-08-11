@@ -24,9 +24,18 @@ export interface SearchResult {
   author: Author | null;
 }
 
+export interface Response {
+  results: SearchResult[],
+  //next: (() => Promise<Response>) | null
+  isNextAvailable: boolean
+}
+
+const RESULTS_PER_PAGE = 3;
+
 export class Api {
-  async search(query: string, offset: number = 0): Promise<SearchResult[]> {
-    const url = `https://backend.deviantart.com/rss.xml?q=${query.replace(/ /gm, '+')}&offset=${offset}`;
+  async search(query: string, types?: string[], offset?: number): Promise<Response> {
+    const url = `https://backend.deviantart.com/rss.xml?q=${query.replace(/ /gm, '+')}&offset=${offset ?? 0}&limit=${RESULTS_PER_PAGE}${(types && types.length > 0) ? `&types=${types.join(',')}` : ''}`;
+    // const url = `https://swarm-search-server.herokuapp.com/rss.xml?q=${query.replace(/ /gm, '+')}&offset=${offset}&limit=${limit}${types ? `&types=${types.join(',')}` : ''}`;
     const xml = await fetch(url).then(x => x.text());
     const parser = new DOMParser();
     const dom = parser.parseFromString(xml, 'application/xml');
@@ -50,8 +59,11 @@ export class Api {
         icon: Array.from(x.querySelectorAll('[role=author]')).map(x => x.innerHTML).find(x => x.indexOf('http://') === 0 || x.indexOf('https://') === 0)
       } : null
     }));
-    console.log('results', results)
-    return results;
+
+    const isNextAvailable = !!Array.from(dom.querySelector('rss > channel').getElementsByTagName('atom:link')).find(x => x.getAttribute("rel") === "next");
+    //const next = (!isNextAvailable) ? null : () => this.search(query, types, (offset ?? 0) + RESULTS_PER_PAGE);
+
+    return { results, isNextAvailable };
   }
 }
 
