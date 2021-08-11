@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "start": "webpack serve",
-    "start:server": "cd packages/search-server && yarn start:watch",
+    "start:server": "cd packages/search-server && yarn build && yarn start",
     "build": "webpack",
     "link": "npm link @dapplets/dapplet-extension"
   },
