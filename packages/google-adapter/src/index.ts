@@ -99,13 +99,12 @@ export default class GoogleAdapter {
       contextBuilder: (x: any): ContextBuilder => {
         const type = (document.querySelector('#top_nav .MUFPAc .hdtb-mitem[aria-current=page]') as any)?.innerText;
         const map = {
-          'All': ['all'],
           'Videos': ['video']
         };
         return ({
           id: new URL(document.location.href).searchParams.get('q'),
           query: new URL(document.location.href).searchParams.get('q'),
-          types: map[type] ?? []
+          types: map[type]
         });
       },
     }
