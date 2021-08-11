@@ -1,7 +1,7 @@
 {
   "name": "search-dapplet",
   "version": "0.1.0",
-  "description": "Swarm Search",
+  "description": "Search by files uploaded to Swarm.",
   "main": "build/index.js",
   "dependencies": {
     "javascript-time-ago": "^2.3.8"
