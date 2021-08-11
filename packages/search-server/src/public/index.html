@@ -10,5 +10,23 @@
 <body>
     <h1>Swarm Search</h1>
     <p>Search by metadata and content of files uploaded to Swarm.</p>
+    <p>Swarm Search API implements <a href="https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md" target="_blank">OpenSearch 1.1 Draft 6</a> interface.</p>
+    <p>It is fully open sorce and available at GitHub: <a href="https://github.com/dapplets/swarm-search/tree/main/packages/search-server" target="_blank">https://github.com/dapplets/swarm-search/tree/main/packages/search-server</a></p>
+
+    <h2>OpenSearch description document</h2>
+    <p>Returns XML document describing the web interface of a search engine.</p>
+    <code>GET /opensearch.xml</code>
+    
+    <h2>RSS XML search results</h2>
+    <p>Returns XML document with search results by a search query.</p>
+    <code>GET /rss?q={searchTerms}&count={count}&offset={startIndex}</code>
+    
+    <h2>HTML search results</h2>
+    <p>Returns HTML document with search results by a search query.</p>
+    <code>GET /search?q={searchTerms}</code>
+    
+    <h2>JSON suggestions</h2>
+    <p>Returns JSON document with suggestions by a search query.</p>
+    <code>GET /suggestions?part={searchTerms}</code>
 </body>
 </html>
