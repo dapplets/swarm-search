@@ -20,6 +20,7 @@ export default class GoogleFeature {
   private _searchOffset = 0;
 
   activate() {
+    this.adapter.getCurrentVideoInfo().then(console.log).catch(console.error);
     TimeAgo.addDefaultLocale(en);
     const timeAgo = new TimeAgo('en-US');
     const { result, moreResults } = this.adapter.exports;

@@ -50,6 +50,7 @@ export class Api {
         icon: Array.from(x.querySelectorAll('[role=author]')).map(x => x.innerHTML).find(x => x.indexOf('http://') === 0 || x.indexOf('https://') === 0)
       } : null
     }));
+    console.log('results', results)
     return results;
   }
 }

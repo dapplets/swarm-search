@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+    xmlns:ms-ose="http://schemas.microsoft.com/opensearchext/2009/">
+    <ShortName>Swarm Search</ShortName>
+    <Description>Search by metadata and content of files uploaded to Swarm.</Description>
+    <Image width="64" height="64" type="image/png">/favicon.png</Image>
+    <Url type="application/rss+xml" template="/rss?q={searchTerms}&amp;count={count}&amp;offset={startIndex}"/>
+    <Url type="text/html" template="/search?q={searchTerms}"/>
+    <Url type="application/x-suggestions+json" method="GET" template="/suggestions?part={searchTerms}"/>
+    <InputEncoding>UTF-8</InputEncoding>
+    <!-- The tags below should not be necessary, but they work around a bug in Swarm Search's MediaRSS implementation. -->
+    <!-- Swarm Search should be supplying a "type" attribute on their <media:content> elements, but are not. -->
+    <!-- This special flag tells Windows it can use the file extension from the URL to determine the item type.  -->
+    <!-- This should NOT be used with most (properly implemented) sources.  -->
+    <!-- Win7 M3 syntax -->
+    <ms-ose:locationProperties>
+        <ms-ose:property name="TreatLinkAsEnclosure">-1</ms-ose:property>
+    </ms-ose:locationProperties>
+    <!-- Win7 Beta syntax -->
+    <ms-ose:ResultsProcessing format="application/rss+xml">
+        <ms-ose:LinkIsFilePath>-1</ms-ose:LinkIsFilePath>
+    </ms-ose:ResultsProcessing>
+</OpenSearchDescription>

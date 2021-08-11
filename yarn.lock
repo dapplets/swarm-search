@@ -228,6 +228,13 @@
     "@types/mime" "^1"
     "@types/node" "*"
 
+"@types/xml@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@types/xml/-/xml-1.0.6.tgz#6e77fc0e4503efcd0b504cab7f70e3bc71ee82a7"
+  integrity sha512-BCpp2oke88DwxJ/h748oLOQWdZ6k1Uv+aB9LZpyh/VhWqe4mE7X7ysNhF57cRPBs8/GyuUn1VRl+IlFdYsZPsA==
+  dependencies:
+    "@types/node" "*"
+
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.11.1.tgz#2bfd767eae1a6996f432ff7e8d7fc75679c0b6a7"
@@ -4691,6 +4698,11 @@ xdg-basedir@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/xdg-basedir/-/xdg-basedir-4.0.0.tgz#4bc8d9984403696225ef83a1573cbbcb4e79db13"
   integrity sha512-PSNhEJDejZYV7h50BohL09Er9VaIefr2LMAf3OEmpCkjOi34eYyQYAXUTjEQtZJTKcF0E2UKTh+osDLsgNim9Q==
+
+xml@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/xml/-/xml-1.0.1.tgz#78ba72020029c5bc87b8a81a3cfcd74b4a2fc1e5"
+  integrity sha1-eLpyAgApxbyHuKgaPPzXS0ovweU=
 
 xtend@^4.0.2:
   version "4.0.2"
