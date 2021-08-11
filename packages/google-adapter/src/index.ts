@@ -118,7 +118,7 @@ export default class GoogleAdapter {
   }
 
   public attachConfig(feature: IFeature): void {
-    this.adapter.attachConfig(feature);
+    return this.adapter.attachConfig(feature);
   }
 
   public detachConfig(feature: IFeature): void {

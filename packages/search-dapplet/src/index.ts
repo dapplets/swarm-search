@@ -5,59 +5,50 @@ import PLUS_SMALL_ICON from './icons/plus_small.svg';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 
+const RESULTS_PER_PAGE = 3;
+
+TimeAgo.addDefaultLocale(en);
+const timeAgo = new TimeAgo('en-US');
+
 @Injectable
 export default class GoogleFeature {
 
   @Inject('search-adapter')
   public adapter: any;
 
-  private _api = new Api();
-  private _config: any;
-  private _searchQuery: string;
-  private _searchResults: any[] = [];
-  private _showingResultsNmbr = 3;
-  private _setConfig: any;
-  private _searchOffset = 0;
+  private _api = new Api('https://backend.deviantart.com/rss.xml?q={searchTerms}&offset={startIndex}&limit={count}');
+  private _query: string;
+  private _results: any[] = [];
+  private _offset = 0;
+  private _isNextAvailable = false;
 
   activate() {
-    this.adapter.getCurrentVideoInfo().then(console.log).catch(console.error);
-    TimeAgo.addDefaultLocale(en);
-    const timeAgo = new TimeAgo('en-US');
     const { result, moreResults } = this.adapter.exports;
-    this._setConfig = () => {
-      this._config = {
-        SEARCH_RESULT_GROUP: async (ctx) => {
-          if (ctx.query !== this._searchQuery) {
-            this._searchQuery = ctx.query;
-            this._searchOffset = 0;
-            this._showingResultsNmbr = 3;
-            console.log(`searching of ${ctx.types?.join(', ')} ...`);
-            this._searchResults = await this._api.search(this._searchQuery, this._searchOffset++);
+    const { reset } = this.adapter.attachConfig({
+      SEARCH_RESULT_GROUP: async (ctx) => {
+        // new search query
+        if (ctx.query !== this._query) {
+          this._query = ctx.query;
+          this._offset = 0;
+          this._results = [];
+          await this._loadData();
+        }
+
+        const showingResults = this._results.map(x => result({
+          DEFAULT: {
+            title: x.title,
+            url: x.link,
+            date: timeAgo.format(x.pubDate),
+            channelIcon: x.author?.icon,
+            channel: x.author?.name,
+            description: x.description.substr(0, 130) + ' ...',
+            img: x.thumbnail.reverse()[0]?.url,
+            exec: () => window.open(x.link, '_blank')
           }
-          if (this._showingResultsNmbr >= this._searchResults.length - 5) {
-            console.log(`searching of ${ctx.types?.join(', ')} ...`);
-            const newSearchResults = await this._api.search(this._searchQuery, this._searchOffset++);
-            this._searchResults = this._searchResults.concat(newSearchResults);
-          }
-          const showingResults = this._searchResults
-            .filter((value, index) => index < this._showingResultsNmbr)
-            .map(x => result({
-              DEFAULT: {
-                title: x.title,
-                // views: "10M",
-                url: x.link,
-                date: timeAgo.format(x.pubDate),
-                channelIcon: x.author?.icon,
-                channel: x.author?.name,
-                description: x.description.substr(0, 130) + ' ...',
-                img: x.thumbnail.reverse()[0]?.url,
-                badges: [{
-                  label: 'Swarm Search',
-                  color: '#ffc300'
-                }],
-                exec: () => window.open(x.link, '_blank')
-              }
-            }));
+        }));
+
+        // show button "more from swarm" if next data is available
+        if (this._isNextAvailable) {
           showingResults.push(
             moreResults({
               DEFAULT: {
@@ -67,19 +58,24 @@ export default class GoogleFeature {
                   youtube: PLUS_SMALL_ICON,
                   google: SWARM_PLUS_ICON,
                 },
-                exec: () => {
-                  this._showingResultsNmbr += 5
-                  this.adapter.detachConfig(this._config);
-                  this.adapter.attachConfig(this._setConfig());
+                exec: async () => {
+                  this._offset += RESULTS_PER_PAGE;
+                  await this._loadData();
+                  reset();
                 },
               }
             })
           );
-          return showingResults;
-        },
-      };
-      return this._config;
-    };
-    this.adapter.attachConfig(this._setConfig());
+        }
+
+        return showingResults;
+      }
+    });
+  }
+
+  private async _loadData() {
+    const response = await this._api.search(this._query, this._offset, RESULTS_PER_PAGE);
+    this._results.push(...response.results);
+    this._isNextAvailable = response.isNextAvailable;
   }
 }
