@@ -11,3 +11,5 @@ build
 dist
 lerna-debug.log
 .DS_Store
+
+*.log

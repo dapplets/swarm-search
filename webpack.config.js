@@ -1,6 +1,7 @@
 const path = require("path");
+const { WatchIgnorePlugin, DefinePlugin } = require('webpack');
 const RenameAssetPlugin = require('./utils/rename-asset-plugin');
-const { WatchIgnorePlugin } = require('webpack');
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 exports.default = {
   mode: "production",
@@ -13,9 +14,7 @@ exports.default = {
   output: {
     path: path.join(__dirname, 'packages'),
     filename: '[name]/build/index.js',
-    libraryTarget: 'umd',
-    umdNamedDefine: true,
-    globalObject: 'this'
+    library: { type: 'umd' }
   },
   resolve: {
     extensions: [".ts", ".js"]
@@ -48,17 +47,8 @@ exports.default = {
   },
   plugins: [
     new WatchIgnorePlugin({ paths: [/\.js$/, /\.d\.ts$/] }),
-    new RenameAssetPlugin(x => (x.indexOf('.d.ts') !== -1) ? x.replace('src', 'build') : x)
-  ],
-  resolve: {
-    extensions: [".ts", ".js"],
-    fallback: {
-      "stream": require.resolve("stream-browserify"),
-      "timers": false, // require.resolve("timers-browserify"),
-      "buffer": false, // require.resolve("buffer-browserify"),
-      "assert": false, // require.resolve("assert-browserify"),
-      "http": false, // require.resolve("stream-http"),
-      "https": false, // require.resolve("https-browserify"),
-    }
-  }
+    new RenameAssetPlugin(x => (x.indexOf('.d.ts') !== -1) ? x.replace('src', 'build') : x),
+    new NodePolyfillPlugin(),
+    new DefinePlugin({ 'process.env.YTDL_NO_UPDATE': JSON.stringify(true) })
+  ]
 }
