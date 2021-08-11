@@ -1,14 +1,14 @@
 {
   "main": {
-    "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "searchEngineUrl": "https://backend.deviantart.com/rss.xml?q={searchTerms}&offset={startIndex}&limit={count}",
+    "resultsPerPage": 3
   },
   "test": {
-    "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "searchEngineUrl": "https://backend.deviantart.com/rss.xml?q={searchTerms}&offset={startIndex}&limit={count}",
+    "resultsPerPage": 3
   },
   "dev": {
-    "exampleString": "some string value",
-    "exampleHiddenString": "some string value"
+    "searchEngineUrl": "https://backend.deviantart.com/rss.xml?q={searchTerms}&offset={startIndex}&limit={count}",
+    "resultsPerPage": 3
   }
 }

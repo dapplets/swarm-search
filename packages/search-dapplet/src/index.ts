@@ -16,13 +16,24 @@ export default class GoogleFeature {
   @Inject('search-adapter')
   public adapter: any;
 
-  private _api = new Api('https://backend.deviantart.com/rss.xml?q={searchTerms}&offset={startIndex}&limit={count}');
+  private _api: Api;
+  private _resultsPerPage: number;
+
   private _query: string;
   private _results: any[] = [];
   private _offset = 0;
   private _isNextAvailable = false;
 
-  activate() {
+  async activate() {
+    const searchEngineUrl = await Core.storage.get('searchEngineUrl');
+    const resultsPerPage = await Core.storage.get('resultsPerPage');
+
+    if (!searchEngineUrl) throw new Error('Parameter "searchEngineUrl" is required. Check dapplet\'s settings.');
+    if (!resultsPerPage) throw new Error('Parameter "resultsPerPage" is required. Check dapplet\'s settings.');
+
+    this._api = new Api(searchEngineUrl);
+    this._resultsPerPage = parseInt(resultsPerPage);
+
     const { result, moreResults } = this.adapter.exports;
     const { reset } = this.adapter.attachConfig({
       SEARCH_RESULT_GROUP: async (ctx) => {
@@ -59,7 +70,7 @@ export default class GoogleFeature {
                   google: SWARM_PLUS_ICON,
                 },
                 exec: async () => {
-                  this._offset += RESULTS_PER_PAGE;
+                  this._offset += this._resultsPerPage;
                   await this._loadData();
                   reset();
                 },
@@ -74,7 +85,7 @@ export default class GoogleFeature {
   }
 
   private async _loadData() {
-    const response = await this._api.search(this._query, this._offset, RESULTS_PER_PAGE);
+    const response = await this._api.search(this._query, this._offset, this._resultsPerPage);
     this._results.push(...response.results);
     this._isNextAvailable = response.isNextAvailable;
   }

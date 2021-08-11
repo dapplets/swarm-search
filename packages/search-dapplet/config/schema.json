@@ -1,15 +1,14 @@
 {
   "type": "object",
-  "required": ["exampleString", "exampleHiddenString"],
+  "required": ["searchEngineUrl", "resultsPerPage"],
   "properties": {
-    "exampleString": {
+    "searchEngineUrl": {
       "type": "string",
-      "title": "Example of string property"
+      "title": "Search Engine URL"
     },
-    "exampleHiddenString": {
-      "type": "string",
-      "title": "Example of hidden string property",
-      "hidden": true
+    "resultsPerPage": {
+      "type": "number",
+      "title": "Page size"
     }
   }
 }
