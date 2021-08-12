@@ -1,5 +1,12 @@
 {
   "type": "object",
-  "required": [],
-  "properties": {}
+  "required": [
+    "searchEngineUrl"
+  ],
+  "properties": {
+    "searchEngineUrl": {
+      "type": "string",
+      "title": "Search Engine URL"
+    }
+  }
 }

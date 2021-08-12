@@ -1,5 +1,11 @@
 {
-  "main": {},
-  "test": {},
-  "dev": {}
+  "main": {
+    "searchEngineUrl": "https://swarm-search-server.herokuapp.com/"
+  },
+  "test": {
+    "searchEngineUrl": "https://swarm-search-server.herokuapp.com/"
+  },
+  "dev": {
+    "searchEngineUrl": "http://localhost:3000/"
+  }
 }

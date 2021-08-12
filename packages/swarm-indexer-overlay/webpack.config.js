@@ -4,7 +4,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     devtool: false,
     name: 'swarm-indexer-overlay',
     output: {

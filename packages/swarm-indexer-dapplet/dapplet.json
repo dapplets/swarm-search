@@ -14,5 +14,8 @@
   },
   "dependencies": {
     "swarm-gateway-adapter": "0.1.0"
+  },
+  "overlays": {
+    "swarm-indexer-overlay": "https://localhost:3001/packages/swarm-indexer-overlay/build/"
   }
 }
