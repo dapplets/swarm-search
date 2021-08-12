@@ -32,21 +32,56 @@ export interface Response {
 export class Api {
   constructor(private _url: string) { }
 
-  async search(query: string, offset: number, limit: number): Promise<Response> {
+  async search(query: string, offset: number, limit: number, type: string): Promise<Response> {
     try {
-      const url = this._url
-        .replace(/{searchTerms\??}/gm, query.replace(/ /gm, '+'))
-        .replace(/{startIndex\??}/gm, offset.toString())
-        .replace(/{count\??}/gm, limit.toString());
+      const url = new URL(this._url);
+      url.searchParams.forEach((value, key) => {
 
-      const xml = await fetch(url).then(x => x.text());
+        if (/{searchTerms\??}/gm.test(value)) {
+          const newValue = query?.replace(/ /gm, '+');
+          if (newValue) {
+            url.searchParams.set(key, newValue);
+          } else {
+            url.searchParams.delete(key);
+          }
+        }
+
+        if (/{startIndex\??}/gm.test(value)) {
+          const newValue = offset?.toString();
+          if (newValue) {
+            url.searchParams.set(key, newValue);
+          } else {
+            url.searchParams.delete(key);
+          }
+        }
+
+        if (/{count\??}/gm.test(value)) {
+          const newValue = limit?.toString();
+          if (newValue) {
+            url.searchParams.set(key, newValue);
+          } else {
+            url.searchParams.delete(key);
+          }
+        }
+
+        if (/{type\??}/gm.test(value)) {
+          const newValue = type?.toString();
+          if (newValue) {
+            url.searchParams.set(key, newValue);
+          } else {
+            url.searchParams.delete(key);
+          }
+        }
+      });
+
+      const xml = await fetch(url.href).then(x => x.text());
       const parser = new DOMParser();
       const dom = parser.parseFromString(xml, 'application/xml');
       const results: SearchResult[] = Array.from(dom.querySelectorAll('rss > channel > item')).map(x => ({
-        title: x.querySelector('title').textContent,
-        link: x.querySelector('link').textContent,
-        pubDate: new Date(x.querySelector('pubDate').textContent),
-        description: strip(x.querySelector('description').textContent),
+        title: x.querySelector('title')?.textContent,
+        link: x.querySelector('link')?.textContent,
+        pubDate: x.querySelector('pubDate') ? new Date(x.querySelector('pubDate')?.textContent) : null,
+        description: x.querySelector('description') ? strip(x.querySelector('description')?.textContent) : null,
         thumbnail: Array.from(x.getElementsByTagName('media:thumbnail')).map(y => ({
           url: y.getAttribute('url'),
           height: parseInt(y.getAttribute('height')),
