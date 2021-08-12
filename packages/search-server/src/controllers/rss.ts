@@ -40,7 +40,13 @@ export function get(req: Request, res: Response) {
                     {
                         "query_string": {
                             "query": query,
-                            "fuzziness": "AUTO"
+                            "fuzziness": "AUTO",
+                            "fields": [
+                                "attachment.content",
+                                "metadata.name",
+                                "metadata.title",
+                                "metadata.description"
+                            ]
                         }
                     },
                     {
@@ -53,7 +59,13 @@ export function get(req: Request, res: Response) {
         } : {
             "query_string": {
                 "query": query,
-                "fuzziness": "AUTO"
+                "fuzziness": "AUTO",
+                "fields": [
+                    "attachment.content",
+                    "metadata.name",
+                    "metadata.title",
+                    "metadata.description"
+                ]
             }
         },
         "_source": [
