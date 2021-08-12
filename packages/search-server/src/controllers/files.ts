@@ -21,8 +21,9 @@ export function post(req: Request, res: Response) {
             return;
         }
 
-        const { ELASTICSEARCH_URL } = process.env;
-        const url = ELASTICSEARCH_URL + `fs_index/_doc/${metadata.reference}?pipeline=attachment`;
+        metadata.date = new Date().toISOString();
+
+        const url = process.env.ELASTICSEARCH_URL + `fs_index/_doc/${metadata.reference}?pipeline=attachment`;
 
         const body = JSON.stringify({
             data: req.file.buffer.toString('base64'),
