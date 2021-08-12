@@ -15,6 +15,7 @@
   "scripts": {
     "start": "webpack serve",
     "start:server": "cd packages/search-server && yarn build && yarn start",
+    "start:overlay": "cd packages/swarm-indexer-overlay && yarn start",
     "build": "webpack",
     "link": "npm link @dapplets/dapplet-extension"
   },
