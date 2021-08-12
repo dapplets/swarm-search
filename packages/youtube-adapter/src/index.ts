@@ -70,7 +70,7 @@ export default class YoutubeAdapter {
             contextBuilder: (p: any) => ({
                 id: document.location.href,
                 query: document.querySelector('#search #search')?.['value'],
-                types: ['video']
+                type: 'video'
             }),
             theme: this._getTheme
         }

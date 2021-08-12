@@ -23,6 +23,7 @@ export default class GoogleFeature {
   private _results: any[] = [];
   private _offset = 0;
   private _isNextAvailable = false;
+  private _searchType = null;
 
   async activate() {
     const searchEngineUrl = await Core.storage.get('searchEngineUrl');
@@ -40,6 +41,7 @@ export default class GoogleFeature {
         // new search query
         if (ctx.query !== this._query) {
           this._query = ctx.query;
+          this._searchType = ctx.type;
           this._offset = 0;
           this._results = [];
           await this._loadData();
@@ -49,12 +51,13 @@ export default class GoogleFeature {
           DEFAULT: {
             title: x.title,
             url: x.link,
-            date: timeAgo.format(x.pubDate),
+            date: x.pubDate ? timeAgo.format(x.pubDate) : null,
             channelIcon: x.author?.icon,
             channel: x.author?.name,
-            description: x.description.substr(0, 130) + ' ...',
+            description: x.description ? (x.description.length > 130 ? x.description.substr(0, 130) + ' ...' : x.description) : null,
             img: x.thumbnail.reverse()[0]?.url,
-            exec: () => window.open(x.link, '_blank')
+            exec: () => window.open(x.link, '_blank'),
+            caption: x.link ? 'bzz://' + /[0-9a-fA-F]{64}/gm.exec(x.link)[0] : null
           }
         }));
 
@@ -85,7 +88,7 @@ export default class GoogleFeature {
   }
 
   private async _loadData() {
-    const response = await this._api.search(this._query, this._offset, this._resultsPerPage);
+    const response = await this._api.search(this._query, this._offset, this._resultsPerPage, this._searchType);
     this._results.push(...response.results);
     this._isNextAvailable = response.isNextAvailable;
   }

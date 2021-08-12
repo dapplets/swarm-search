@@ -33,13 +33,14 @@ class App extends React.Component<Props, State> {
       description: "",
       thumbnailUrl: "",
       channelName: "",
-      channelIconUrl: "",
+      channelIconUrl: ""
     };
 
     bridge.onFile((file) => this.setState({ file }));
   }
 
   onUploadHandler = () => {
+    if (!this.state.file) return;
     this.setState({ uploading: true });
     bridge
       .upload({
@@ -48,6 +49,7 @@ class App extends React.Component<Props, State> {
         thumbnailUrl: this.state.thumbnailUrl,
         channelName: this.state.channelName,
         channelIconUrl: this.state.channelIconUrl,
+        type: mimeVideo.indexOf(this.state.file.type) !== -1 ? 'video' : 'other'
       })
       .then((x) => this.setState({ uploading: false, done: true }))
       .catch((err) =>

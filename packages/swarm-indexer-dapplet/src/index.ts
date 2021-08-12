@@ -41,14 +41,23 @@ export default class SwarmIndexerDapplet {
       type: ctx.file.type
     }, {
       'upload': (_, { message }) => {
-        message.url = ctx.url;
-        message.reference = ctx.reference;
-        message.name = ctx.file.name;
-        message.size = ctx.file.size;
-        message.type = ctx.file.type;
+        const metadata = {
+          title: message.title,
+          description: message.description,
+          thumbnailUrl: message.thumbnailUrl,
+          channelName: message.channelName,
+          channelIconUrl: message.channelIconUrl,
+          type: message.type,
+          url: ctx.url,
+          reference: ctx.reference,
+          name: ctx.file.name,
+          size: ctx.file.size,
+          contentType: ctx.file.type
+        };
+
         const formData = new FormData();
         formData.append("file", ctx.file);
-        formData.append("metadata", JSON.stringify(message));
+        formData.append("metadata", JSON.stringify(metadata));
         fetch(this.searchEngineUrl + 'files', { method: 'POST', body: formData })
           .then(x => x.ok ? overlay.send('upload_done', 'Cannot upload') : overlay.send('upload_error', 'Error'))
           .catch(x => overlay.send('upload_error', 'Error'));
