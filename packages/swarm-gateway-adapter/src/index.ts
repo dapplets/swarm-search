@@ -3,6 +3,8 @@ import { Button } from './button';
 
 @Injectable
 export default class SwarmGatewayAdapter {
+  private _currentInput: HTMLInputElement = null;
+
   public exports = () => ({
     button: this.adapter.createWidgetFactory(Button)
   });
@@ -21,8 +23,19 @@ export default class SwarmGatewayAdapter {
         return link ? ({
           id: link.innerText,
           url: link.innerText,
-          reference: /[0-9a-fA-F]{64}/gm.exec(link.innerText)[0]
+          reference: /[0-9a-fA-F]{64}/gm.exec(link.innerText)[0],
+          file: this._currentInput.files[0]
         }) : null
+      },
+    },
+    ATTACHED_FILE: {
+      containerSelector: '#root',
+      contextSelector: 'input',
+      contextBuilder: (node) => {
+        this._currentInput = node;
+        return ({
+          id: 'file'
+        });
       },
     }
   };
