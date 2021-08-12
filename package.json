@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "start": "concurrently \"npm:start:serve\" \"npm:start:webpack\" \"npm:start:server\"",
-    "start:webpack": "parallel-webpack --no-stats --watch",
+    "start:webpack": "parallel-webpack --watch",
     "start:server": "npm run start:watch --workspace=search-server",
     "start:serve": "serve -C --ssl-cert utils/server.cert --ssl-key utils/server.key -l 3001",
     "build": "webpack",
