@@ -72,7 +72,8 @@ export function get(req: Request, res: Response) {
             "metadata"
         ],
         "from": offset,
-        "size": count
+        "size": count,
+        "sort" : ["_score"]
     });
 
     fetch(url, { method: 'POST', body, headers: { 'Content-Type': 'application/json' } })
