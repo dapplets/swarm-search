@@ -1,6 +1,7 @@
 export interface IResultState {
     hidden: boolean;
     img: string;
+    caption: string;
     title: string;
     views: string;
     date: string;
@@ -28,7 +29,7 @@ export class Result {
     public mount() {
         if (!this.el) this._createElement();
 
-        const { img, title, hidden, views, date, channelIcon, channel, description, badges, url } = this.state;
+        const { caption, img, title, hidden, views, date, channelIcon, channel, description, badges, url } = this.state;
 
         /**
          * Base: https://www.deviantart.com/bellhenge/art/SS-and-BotW-2-821305796
@@ -43,7 +44,9 @@ export class Result {
             this.el.innerHTML = `
                 <div style="position: relative; margin: 0 52px 30px 0;">
                     <div style="display: flex; align-items: center; margin-bottom: 7px;">
-                        <div style="width: 18px;
+                        <div style="
+                            min-width: 18px;
+                            width: 18px;
                             height: 18px;
                             display: flex;
                             justify-content: center;
@@ -53,31 +56,40 @@ export class Result {
                         >
                             ${getIcon()}
                         </div>
-                        <p style="
-                            font-size: 16px;
-                            line-height: 19px;
-                            color: #FF9243;
-                            margin: 0;
-                            margin-left: 7px;
-                        ">
-                            filename.fileformat
-                        </p>
+                        ${caption ? `
+                            <p style="
+                                font-size: 16px;
+                                line-height: 19px;
+                                color: #FF9243;
+                                margin: 0;
+                                margin-left: 7px;
+                            ">
+                                ${caption}
+                            </p>
+                        ` : ''}
                     </div>
                     
 
                     <div><a style="font-size: 14px; cursor: pointer; color: #000;">${minifyUrl}</a></div>
+                    
                     <div style="margin: 5px 0 5px 0;">
                         <a style="cursor: pointer;"><h3>${title}</h3></a>
                     </div>
+
                     <div style="display: flex;">
-                        <div>
-                            <img style="cursor: pointer; display: block; min-width: 116px; width: 116px; height: 65px; border-radius: 8px; margin-right: 9px; object-fit: contain; background: #000;" 
-                            src="${img}" alt="${title}"/>
-                        </div>
+                        ${(img) ? `
+                            <div>
+                                <img style="cursor: pointer; display: block; min-width: 116px; width: 116px; height: 65px; border-radius: 8px; margin-right: 9px; object-fit: contain; background: #000;" 
+                                src="${img}" alt="${title}"/>
+                            </div>
+                        `: ''}
                         <div style="font-size: 14px; color: #4d5156; line-height: 22.12px;">
-                            ${(!img)
-                    ? `<span>${date}</span> — ${description}`
-                    : `<div>${description}</div><div>${date} · Uploaded by ${channel}</div>`}
+                            ${(!channel)
+                                ? `${(date) ? `<span>${date}</span>` : ''}${(date && description) ? ' — ' : ''}${description ?? ''}`
+                                : `
+                                    ${description ? `<div>${description}</div>` : ''}
+                                    ${date ?? ''}${(date && channel) ? ' · ' : ''}${channel ? `Uploaded by ${channel}` : ''}
+                                `}
                         </div>
                     </div>
                 </div>        
@@ -91,10 +103,10 @@ export class Result {
 
     private _createElement() {
         this.el = document.createElement('div');
-        this.el.addEventListener("click", e => {
-            if (!this.state.disabled) {
-                this.state.exec?.(this.state.ctx, this.state);
-            }
+        this.el.addEventListener("click", (e: any) => {
+            if (this.state.disabled) return;
+            if (e.target.tagName.toLowerCase() !== 'a' && e.target.parentElement.tagName.toLowerCase() !== 'a') return;
+            this.state.exec?.(this.state.ctx, this.state);
         });
         this.mount();
         this.state.init?.(this.state.ctx, this.state);
