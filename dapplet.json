@@ -2,5 +2,7 @@
     "/packages/google-adapter/dapplet.json",
     "/packages/youtube-adapter/dapplet.json",
     "/packages/search-adapter/dapplet.json",
-    "/packages/search-dapplet/dapplet.json"
+    "/packages/search-dapplet/dapplet.json",
+    "/packages/swarm-gateway-adapter/dapplet.json",
+    "/packages/swarm-indexer-dapplet/dapplet.json"
 ]

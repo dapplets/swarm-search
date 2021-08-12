@@ -18,7 +18,9 @@
         "paths": {
             "google-adapter": ["packages/google-adapter/src"],
             "youtube-adapter": ["packages/youtube-adapter/src"],
-            "search-dapplet": ["packages/search-dapplet/src"]
+            "search-dapplet": ["packages/search-dapplet/src"],
+            "swarm-gateway-dapplet": ["packages/swarm-gateway-dapplet/src"],
+            "swarm-indexer-dapplet": ["packages/swarm-indexer-dapplet/src"]
         },
         "composite": true
     }

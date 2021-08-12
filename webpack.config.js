@@ -9,7 +9,9 @@ exports.default = {
   entry: {
     "google-adapter": './packages/google-adapter/src/index.ts',
     "youtube-adapter": './packages/youtube-adapter/src/index.ts',
-    "search-dapplet": './packages/search-dapplet/src/index.ts'
+    "search-dapplet": './packages/search-dapplet/src/index.ts',
+    "swarm-gateway-adapter": './packages/swarm-gateway-adapter/src/index.ts',
+    "swarm-indexer-dapplet": './packages/swarm-indexer-dapplet/src/index.ts'
   },
   output: {
     path: path.join(__dirname, 'packages'),
