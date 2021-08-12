@@ -5,11 +5,13 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 
 module.exports = {
     mode: 'production',
+    devtool: false,
+    name: 'swarm-indexer-overlay',
     output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.join(__dirname, 'build'),
         clean: true
     },
-    entry: "./src/index.tsx",
+    entry: path.join(__dirname, "src/index.tsx"),
     module: {
         rules: [
             {
@@ -22,7 +24,7 @@ module.exports = {
                         },
                     },
                 ],
-                include: path.resolve(__dirname, 'src')
+                include: path.join(__dirname, 'src')
             },
             {
                 test: /\.css$/,
@@ -38,17 +40,8 @@ module.exports = {
         extensions: [".tsx", ".ts", ".js"],
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: "public/index.html" }),
+        new HtmlWebpackPlugin({ template: path.join(__dirname, "public/index.html") }),
         new ForkTsCheckerWebpackPlugin(),
         new WebpackAssetsManifest(),
-    ],
-    devServer: {
-        contentBase: path.join(__dirname, "build"),
-        port: 3004,
-        https: true,
-        hot: false,
-        inline: false,
-        liveReload: false,
-        open: false
-    }
+    ]
 };

@@ -1,5 +1,4 @@
 {
-  "packageManager": "yarn@3.0.0",
   "private": true,
   "name": "swarm-search",
   "version": "0.1.0",
@@ -13,9 +12,10 @@
     "dapplets"
   ],
   "scripts": {
-    "start": "webpack serve",
-    "start:server": "cd packages/search-server && yarn build && yarn start",
-    "start:overlay": "cd packages/swarm-indexer-overlay && yarn start",
+    "start": "concurrently \"npm:start:serve\" \"npm:start:webpack\" \"npm:start:server\"",
+    "start:webpack": "parallel-webpack --no-stats --watch",
+    "start:server": "npm run start:watch --workspace=search-server",
+    "start:serve": "serve -C --ssl-cert utils/server.cert --ssl-key utils/server.key -l 3001",
     "build": "webpack",
     "link": "npm link @dapplets/dapplet-extension"
   },
@@ -25,11 +25,14 @@
   },
   "homepage": "https://github.com/dapplets/swarm-search#readme",
   "workspaces": [
-    "packages/*"
+    "./packages/*"
   ],
   "devDependencies": {
     "@dapplets/dapplet-extension": "latest",
-    "node-polyfill-webpack-plugin": "^1.1.4",    
+    "concurrently": "^6.2.1",
+    "node-polyfill-webpack-plugin": "^1.1.4",
+    "parallel-webpack": "^2.6.0",
+    "serve": "^12.0.0",
     "ts-loader": "^9.2.5",
     "typescript": "^4.3.5",
     "url-loader": "^4.1.1",

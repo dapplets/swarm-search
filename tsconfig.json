@@ -23,5 +23,12 @@
             "swarm-indexer-dapplet": ["packages/swarm-indexer-dapplet/src"]
         },
         "composite": true
-    }
+    },
+    "include": [
+        "packages/google-adapter/src",
+        "packages/youtube-adapter/src",
+        "packages/search-dapplet/src",
+        "packages/swarm-gateway-dapplet/src",
+        "packages/swarm-indexer-dapplet/src"
+    ]
 }
