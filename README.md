@@ -54,11 +54,14 @@ The instruction about how to change a search engine in the dapplet's settings is
 
 ![Communication diagram](https://github.com/dapplets/swarm-search/raw/main/docs/communication.png)
 
+### Actors
+
+* **Uploader** - an user uploading files to the Swarm.
+* **Searcher** - an user searching something with activated Search Dapplet.
+
 ### Components
 
-* **Uploader** - an user uploading files to the Swarm
-* **Searcher** - an user searching something with activated Search Dapplet
-* [**Indexer Dapplet**](https://github.com/dapplets/swarm-search/tree/main/packages/swarm-indexer-dapplet) - augments Swarm Gateway to collect metadata from Uploader
+* [**Indexer Dapplet**](https://github.com/dapplets/swarm-search/tree/main/packages/swarm-indexer-dapplet) - augments Swarm Gateway to collect metadata from Uploader.
 * [**Search Dapplet**](https://github.com/dapplets/swarm-search/tree/main/packages/search-dapplet) - injects search results in third party websites.
 * [**Search API**](https://github.com/dapplets/swarm-search/tree/main/packages/search-server) - a server which proxies the Elasticsearch engine and transforms data to OpenSearch compatible format.
 * **Elasticsearch** - an engine implementing full-text search.
@@ -71,15 +74,15 @@ Bee Nodes
 
 A1: An Uploader (user) attaches a file to the Swarm Gateway and fills out the manifest form for indexing.
 
-A2: Swarm Gateway sends a file to Bee node
+A2: Swarm Gateway sends a file to Bee node.
 
-A3: Bee node returns a swarm reference hash
+A3: Bee node returns a swarm reference hash.
 
 A4: The Indexer Dapplet intercepts the uploaded file and swarm reference.
 
-A5: The Indexer Dapplet sends file, reference and metadata to the Search Backend
+A5: The Indexer Dapplet sends file, reference and metadata to the Search Backend.
 
-A6: Search API retranslates the query to Elasticsearch
+A6: Search API retranslates the query to Elasticsearch.
 
 ### B: File searching
 
@@ -87,7 +90,7 @@ B1: Searcher opens the website and sends a query.
 
 B2: Search Dapplet intercepts the entered query from the website.
 
-B3: Search Dapplet send [OpenSearch-compatible query](#custom-opensearch-query) to fetch search results.
+B3: Search Dapplet sends [OpenSearch-compatible query](#custom-opensearch-query) to fetch search results.
 
 B4: Search API receives OpenSearch query and transforms it to ElasticSearch request.
 
@@ -102,6 +105,8 @@ B8: Searcher can see external search results and open them.
 ### Custom OpenSearch Query
 
 The Search Dapplet uses additional `type` parameter to filter search results by content type.
+
+This parameter is not specified by OpenSearch specification and must be implemented by a search server if you want to have content type specific search.
 
 Valid value of this parameter is `video`.
 
