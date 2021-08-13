@@ -87,7 +87,7 @@ B1: Searcher opens the website and sends a query.
 
 B2: Search Dapplet intercepts the entered query from the website.
 
-B3: Search Dapplet send OpenSearch-compatible query to fetch search results.
+B3: Search Dapplet send [OpenSearch-compatible query](#custom-opensearch-query) to fetch search results.
 
 B4: Search API receives OpenSearch query and transforms it to ElasticSearch request.
 
@@ -98,6 +98,16 @@ B6: Search API transforms JSON to OpenSearch's XML and returns to the dapplet.
 B7: Search Dapplet injects search results to the website.
 
 B8: Searcher can see external search results and open them.
+
+### Custom OpenSearch Query
+
+The Search Dapplet uses additional `type` parameter to filter search results by content type.
+
+Valid value of this parameter is `video`.
+
+```
+/rss?q={searchTerms}&count={count}&offset={startIndex}&type={type?}
+```
 
 ## Development
 
