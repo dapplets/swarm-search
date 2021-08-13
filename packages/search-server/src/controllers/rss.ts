@@ -41,6 +41,7 @@ export function get(req: Request, res: Response) {
                         "query_string": {
                             "query": query,
                             "fuzziness": "AUTO",
+                            "default_operator": "AND",
                             "fields": [
                                 "attachment.content",
                                 "metadata.name",
@@ -60,6 +61,7 @@ export function get(req: Request, res: Response) {
             "query_string": {
                 "query": query,
                 "fuzziness": "AUTO",
+                "default_operator": "AND",
                 "fields": [
                     "attachment.content",
                     "metadata.name",
