@@ -1,14 +1,14 @@
 {
   "main": {
-    "searchEngineUrl": "https://backend.deviantart.com/rss.xml?q={searchTerms}&offset={startIndex}&limit={count}",
+    "searchEngineUrl": "https://swarm-search-server.herokuapp.com/rss?q={searchTerms}&count={count}&offset={startIndex}&type={type?}",
     "resultsPerPage": 3
   },
   "test": {
-    "searchEngineUrl": "https://backend.deviantart.com/rss.xml?q={searchTerms}&offset={startIndex}&limit={count}",
+    "searchEngineUrl": "https://swarm-search-server.herokuapp.com/rss?q={searchTerms}&count={count}&offset={startIndex}&type={type?}",
     "resultsPerPage": 3
   },
   "dev": {
-    "searchEngineUrl": "https://backend.deviantart.com/rss.xml?q={searchTerms}&offset={startIndex}&limit={count}",
+    "searchEngineUrl": "http://localhost:3000/rss?q={searchTerms}&count={count}&offset={startIndex}&type={type?}",
     "resultsPerPage": 3
   }
 }
