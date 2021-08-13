@@ -6,19 +6,19 @@ The set of modules augmenting Google and YouTube search pages with data from Ope
 
 ### Google Search
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/master/docs/demo-google-search-preview.png)](https://github.com/dapplets/swarm-search/raw/master/docs/demo-google-search.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search.mp4)
 
 ### YouTube Search
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/master/docs/demo-youtube-search-preview.png)](https://github.com/dapplets/swarm-search/raw/master/docs/demo-youtube-search.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-youtube-search-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-youtube-search.mp4)
 
 ### Swarm Gateway
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/master/docs/demo-gateway-preview.png)](https://github.com/dapplets/swarm-search/raw/master/docs/demo-gateway.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-gateway-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-gateway.mp4)
 
 ### Media Downloader
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/master/docs/demo-media-downloader-preview.png)](https://github.com/dapplets/swarm-search/raw/master/docs/demo-media-downloader.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-media-downloader-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-media-downloader.mp4)
 
 ### Change Search Engine
 
@@ -36,15 +36,15 @@ Swarm Search server written as a mock of non-developed yet search engine which a
 https://swarm-search-server.herokuapp.com/rss?q={searchTerms}&count={count}&offset={startIndex}&type={type?}
 ```
 
-Any [OpenSearch-compatible](https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md) search engine can be specified in the dapplet's settings. 
+Any [OpenSearch-compatible](https://github.com/dewitt/opensearch/blob/main/opensearch-1-1-draft-6.md) search engine can be specified in the dapplet's settings. 
 
 The instruction about how to change a search engine in the dapplet's settings is in following video.
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/master/docs/demo-change-search-engine-preview.png)](https://github.com/dapplets/swarm-search/raw/master/docs/demo-change-search-engine.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-change-search-engine-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-change-search-engine.mp4)
 
 ## Project Architecture
 
-![Communication diagram](https://github.com/dapplets/swarm-search/raw/master/docs/communication.png)
+![Communication diagram](https://github.com/dapplets/swarm-search/raw/main/docs/communication.png)
 
 ## Getting Started
 
