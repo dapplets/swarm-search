@@ -57,7 +57,7 @@ export default class GoogleFeature {
             description: x.description ? (x.description.length > 130 ? x.description.substr(0, 130) + ' ...' : x.description) : null,
             img: x.thumbnail.reverse()[0]?.url,
             exec: () => window.open(x.link, '_blank'),
-            caption: x.link ? 'bzz://' + /[0-9a-fA-F]{64}/gm.exec(x.link)[0] : null
+            caption: x.link ? 'bzz://' + /[0-9a-fA-F]{64}/gm.exec(x.link)?.[0] : null
           }
         }));
 
