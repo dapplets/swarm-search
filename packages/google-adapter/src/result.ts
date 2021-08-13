@@ -1,7 +1,6 @@
 export interface IResultState {
     hidden: boolean;
     img: string;
-    caption: string;
     title: string;
     views: string;
     date: string;
@@ -29,7 +28,7 @@ export class Result {
     public mount() {
         if (!this.el) this._createElement();
 
-        const { caption, img, title, hidden, views, date, channelIcon, channel, description, badges, url } = this.state;
+        const { img, title, hidden, views, date, channelIcon, channel, description, badges, url } = this.state;
 
         /**
          * Base: https://www.deviantart.com/bellhenge/art/SS-and-BotW-2-821305796
@@ -52,25 +51,14 @@ export class Result {
                             justify-content: center;
                             align-items: center;
                             background: #FF951A;
-                            border-radius: 50%;"
+                            border-radius: 50%;
+                            margin-right: 6px;
+                        "
                         >
                             ${getIcon()}
                         </div>
-                        ${caption ? `
-                            <p style="
-                                font-size: 16px;
-                                line-height: 19px;
-                                color: #FF9243;
-                                margin: 0;
-                                margin-left: 7px;
-                            ">
-                                ${caption}
-                            </p>
-                        ` : ''}
+                        <a style="font-size: 14px; cursor: pointer; color: #000;">${minifyUrl}</a>
                     </div>
-                    
-
-                    <div><a style="font-size: 14px; cursor: pointer; color: #000;">${minifyUrl}</a></div>
                     
                     <div style="margin: 5px 0 5px 0;">
                         <a style="cursor: pointer;"><h3>${title}</h3></a>
