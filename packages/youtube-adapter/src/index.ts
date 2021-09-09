@@ -27,12 +27,15 @@ export default class YoutubeAdapter {
                     insert: 'end'
                 }
             },
-            contextBuilder: (p: any) => ({
-                id: (new URL(document.location.href)).searchParams.get('v'),
-                title: p.querySelector('#info-contents h1').innerText,
-                views: parseInt(p.querySelector('#info-contents #info-text #count').innerText.match(/[0-9]/g).join('')),
-                videoId: (new URL(document.location.href)).searchParams.get('v')
-            }),
+            contextBuilder: (p: any) => {
+                if (p.closest('.ad-showing')) return;
+                return ({
+                    id: (new URL(document.location.href)).searchParams.get('v'),
+                    title: p.querySelector('#info-contents h1').innerText,
+                    views: parseInt(p.querySelector('#info-contents #info-text #count').innerText.match(/[0-9]/g).join('')),
+                    videoId: (new URL(document.location.href)).searchParams.get('v')
+                });
+            },
             theme: this._getTheme
         },
         SEARCH_RESULT: {
