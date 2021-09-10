@@ -28,7 +28,7 @@ export default class YoutubeAdapter {
                 }
             },
             contextBuilder: (p: any) => {
-                if (p.closest('.ad-showing')) return;
+                if (p.querySelector('.ad-showing')) return;
                 return ({
                     id: (new URL(document.location.href)).searchParams.get('v'),
                     title: p.querySelector('#info-contents h1').innerText,
