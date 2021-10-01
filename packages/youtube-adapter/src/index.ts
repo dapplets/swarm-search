@@ -19,8 +19,8 @@ export default class YoutubeAdapter {
 
     public config = {
         VIDEO: {
-            containerSelector: 'ytd-watch-flexy:not([hidden]) #primary',
-            contextSelector: "#primary-inner",
+            containerSelector: 'ytd-page-manager',
+            contextSelector: 'ytd-watch-flexy[video-id]',
             insPoints: {
                 MENU: {
                     selector: "#info-contents #menu ytd-menu-renderer #top-level-buttons-computed",
@@ -31,8 +31,8 @@ export default class YoutubeAdapter {
                 if (p.querySelector('.ad-showing')) return;
                 return ({
                     id: (new URL(document.location.href)).searchParams.get('v'),
-                    title: p.querySelector('#info-contents h1').innerText,
-                    views: parseInt(p.querySelector('#info-contents #info-text #count').innerText.match(/[0-9]/g).join('')),
+                    title: p.querySelector('#primary-inner #info-contents h1').innerText,
+                    views: parseInt(p.querySelector('#primary-inner #info-contents #info-text #count').innerText.match(/[0-9]/g).join('')),
                     videoId: (new URL(document.location.href)).searchParams.get('v')
                 });
             },
