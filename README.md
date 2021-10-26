@@ -10,7 +10,7 @@ The dapplet works at Google search pages. In the tab "all" any content type will
 
 [![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search-preview.png)](https://drive.google.com/file/d/1IFLuD0vqVHKlKuHBm71if-7zLKL1oaXL/view?usp=sharing)
 
-[![Download the video]](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search.mp4)
+[Download the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search.mp4)
 
 ### YouTube Search
 
