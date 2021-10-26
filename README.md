@@ -16,7 +16,9 @@ The dapplet works at Google search pages. In the tab "all" any content type will
 
 At the YouTube only video search results are available.
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-youtube-search-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-youtube-search.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-youtube-search-preview.png)](https://drive.google.com/file/d/1f0L2-0GNffUzWzMSqUA-pZr5ZeXz3xyf/view?usp=sharing)
+
+[Download the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-youtube-search.mp4)
 
 ### Indexing via Swarm Gateway
 
