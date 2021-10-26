@@ -10,7 +10,7 @@ The dapplet works at Google search pages. In the tab "all" any content type will
 
 [![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search-preview.png)](https://drive.google.com/file/d/1IFLuD0vqVHKlKuHBm71if-7zLKL1oaXL/view?usp=sharing)
 
-[Download the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search.mp4)
+[Download video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search.mp4)
 
 ### YouTube Search
 
@@ -18,19 +18,23 @@ At the YouTube only video search results are available.
 
 [![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-youtube-search-preview.png)](https://drive.google.com/file/d/1f0L2-0GNffUzWzMSqUA-pZr5ZeXz3xyf/view?usp=sharing)
 
-[Download the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-youtube-search.mp4)
+[Download video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-youtube-search.mp4)
 
 ### Indexing via Swarm Gateway
 
 [**Swarm Gateway**](https://gateway.ethswarm.org/) is the website allowing any user to upload a small file to Swarm free. We've created the dapplet "Swarm Indexer" to augment this webpage for collecting metadata from user.
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-gateway-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-gateway.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-gateway-preview.png)](https://drive.google.com/file/d/1sJvzoBVoQReYJBU2Ry0PsUSaye6oMST5/view?usp=sharing)
+
+[Download video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-gateway.mp4)
 
 ### Indexing via Media Downloader
 
 [**Media Downloader**](https://github.com/dapplets/media-downloader) is a dapplet created at Liberate Data Week Hackathon. We added the feature which allows you to add video to the index and make it available via Swarm Search dapplet.
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-media-downloader-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-media-downloader.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-media-downloader-preview.png)](https://drive.google.com/file/d/1FNeJVZ3KMPEj2WX6KgJYfzDXZUxR1scm/view?usp=sharing)
+
+[Download video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-media-downloader.mp4)
 
 ### Change Search Engine
 
@@ -52,7 +56,9 @@ Any [OpenSearch-compatible](https://github.com/dewitt/opensearch/blob/main/opens
 
 The instruction about how to change a search engine in the dapplet's settings is in following video.
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-change-search-engine-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-change-search-engine.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-change-search-engine-preview.png)](https://drive.google.com/file/d/1QFvSjFNGrramH0qNvv82AzURAnMehBG4/view?usp=sharing)
+
+[Download video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-change-search-engine.mp4)
 
 ## Project Architecture
 
