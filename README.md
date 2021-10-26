@@ -8,7 +8,9 @@ The set of modules augmenting Google and YouTube search pages with data from Ope
 
 The dapplet works at Google search pages. In the tab "all" any content type will be shown, in the tab "video" - only videos.
 
-[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search-preview.png)](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search.mp4)
+[![Watch the video](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search-preview.png)](https://drive.google.com/file/d/1IFLuD0vqVHKlKuHBm71if-7zLKL1oaXL/view?usp=sharing)
+
+[![Download the video]()](https://github.com/dapplets/swarm-search/raw/main/docs/demo-google-search.mp4)
 
 ### YouTube Search
 
