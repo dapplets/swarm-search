@@ -8,7 +8,7 @@
   "main": { "$ref": "package.json#/main" },
   "contextIds": ["google.com", "www.google.com"],
   "dependencies": {
-    "dynamic-adapter.dapplet-base.eth": "0.6.10"
+    "dynamic-adapter.dapplet-base.eth": "0.6.14"
   },
   "interfaces": {
     "search-adapter": "0.1.0"

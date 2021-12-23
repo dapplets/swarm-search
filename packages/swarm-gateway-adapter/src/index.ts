@@ -30,7 +30,7 @@ export default class SwarmGatewayAdapter {
     },
     ATTACHED_FILE: {
       containerSelector: '#root',
-      contextSelector: 'input',
+      contextSelector: 'input:not([directory])',
       contextBuilder: (node) => {
         this._currentInput = node;
         return ({

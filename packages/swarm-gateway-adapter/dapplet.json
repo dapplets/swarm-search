@@ -8,6 +8,6 @@
   "main": { "$ref": "package.json#/main" },
   "contextIds": ["gateway.ethswarm.org"],
   "dependencies": {
-    "dynamic-adapter.dapplet-base.eth": "0.6.10"
+    "dynamic-adapter.dapplet-base.eth": "0.6.14"
   }
 }
