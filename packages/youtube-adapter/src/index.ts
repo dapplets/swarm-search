@@ -23,7 +23,7 @@ export default class YoutubeAdapter {
             contextSelector: 'ytd-watch-flexy[video-id]',
             insPoints: {
                 MENU: {
-                    selector: "#info-contents #menu ytd-menu-renderer #top-level-buttons-computed",
+                    selector: "#menu #top-level-buttons-computed",
                     insert: 'end'
                 }
             },
@@ -32,7 +32,7 @@ export default class YoutubeAdapter {
                 return ({
                     id: (new URL(document.location.href)).searchParams.get('v'),
                     title: p.querySelector('#primary-inner #info-contents h1').innerText,
-                    views: parseInt(p.querySelector('#primary-inner #info-contents #info-text #count').innerText.match(/[0-9]/g).join('')),
+                    views: parseInt(p.querySelector('#primary-inner #info-contents #info-text #count .view-count').innerText.match(/[0-9]/g).join('')),
                     videoId: (new URL(document.location.href)).searchParams.get('v')
                 });
             },

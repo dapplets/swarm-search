@@ -121,11 +121,11 @@ export class Button {
                   }
 
                   .dapplet-widget-button {
-                    color: ${disabled ? '#5a5a5a' : '#606060'};
+                    color: ${disabled ? '#606060' : '#000000'};
                   }
 
                   html[dark] .dapplet-widget-button {
-                    color: ${disabled ? '#5a5a5a' : '#aaaaaa'};
+                    color: ${disabled ? '#aaaaaa' : '#ffffff'};
                   }
                 </style>
                 <div 
@@ -134,7 +134,6 @@ export class Button {
                         display: flex;
                         font-family: Roboto, Arial, sans-serif;
                         font-size: 14px;
-                        text-transform: uppercase;
                         font-weight: 500;
                         letter-spacing: 0.007px;
                         cursor: pointer;
