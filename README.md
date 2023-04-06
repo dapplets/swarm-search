@@ -1,3 +1,5 @@
+<img width="1245" alt="swarm-search" src="https://user-images.githubusercontent.com/43613968/230372432-8c075cee-c638-4006-a1fb-e836f9ce3687.png">
+
 # Swarm Search
 
 The set of modules augmenting Google and YouTube search pages with data from OpenSearch-compatible engines.
